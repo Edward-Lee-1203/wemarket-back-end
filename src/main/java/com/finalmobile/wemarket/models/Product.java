@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name ="product")
@@ -25,18 +26,23 @@ public class Product {
     private  Integer price;
 
     @NotNull
-    private  Integer market_id;
+    @OneToOne
+    @JoinColumn(name = "market_id")
+    private  Market market;
+
+    @OneToMany(mappedBy = "product")
+    private List<OrderDetail> orderDetails;
 
     @NotBlank
     @Size(max = 45)
     private String product_type;
 
     public Product(Integer id, @NotNull @Size(max = 45) String name, @NotNull Integer price,
-                   @NotNull Integer market_id, @NotBlank @Size(max = 45) String product_type) {
+                   @NotNull Market market, @NotBlank @Size(max = 45) String product_type) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.market_id = market_id;
+        this.market = market;
         this.product_type = product_type;
     }
 
@@ -68,12 +74,12 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getMarket_id() {
-        return market_id;
+    public Market getMarket() {
+        return market;
     }
 
-    public void setMarket_id(Integer market_id) {
-        this.market_id = market_id;
+    public void setMarket(Market market) {
+        this.market = market;
     }
 
     public String getProduct_type() {
@@ -82,5 +88,13 @@ public class Product {
 
     public void setProduct_type(String product_type) {
         this.product_type = product_type;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

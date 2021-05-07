@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(	name = "users",
+@Table(	name = "user",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username")
         })
@@ -44,6 +44,9 @@ public class User {
     @NotBlank
     @Enumerated(EnumType.STRING)
     private UserStatus user_status;
+
+    @OneToOne(mappedBy = "user")
+    private Delivery delivery;
 
     public User(String username, String password) {
         this.username = username;
@@ -106,4 +109,11 @@ public class User {
         this.user_status = user_status;
     }
 
+    public Delivery getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+    }
 }

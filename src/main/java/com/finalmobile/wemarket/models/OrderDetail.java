@@ -10,24 +10,29 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name ="order_detail")
 public class OrderDetail {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
-    private  Integer product_id;
+    @ManyToOne
+    @JoinColumn(name="product_id")
+    private  Product product;
 
     @NotNull
-    private  Integer order_id;
+    @ManyToOne
+    @JoinColumn(name="order_id")
+    private  Order orders;
 
     @NotNull
     private  Integer kilogram;
 
-    public OrderDetail(Integer id, @NotNull Integer product_id, @NotNull Integer order_id
+    public OrderDetail(Integer id, @NotNull Product product, @NotNull Order order
             , @NotNull Integer kilogram) {
         this.id = id;
-        this.product_id = product_id;
-        this.order_id = order_id;
+        this.product = product;
+        this.orders = order;
         this.kilogram = kilogram;
     }
 
@@ -42,20 +47,20 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public Integer getProduct_id() {
-        return product_id;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct_id(Integer product_id) {
-        this.product_id = product_id;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public Integer getOrder_id() {
-        return order_id;
+    public Order getOrders() {
+        return orders;
     }
 
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
+    public void setOrders(Order orders) {
+        this.orders = orders;
     }
 
     public Integer getKilogram() {

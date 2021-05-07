@@ -4,6 +4,7 @@ package com.finalmobile.wemarket.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -22,13 +23,19 @@ public class Delivery {
     private Integer id;
 
     @NotNull
-    private Integer shipper_id;
+    @OneToOne
+    @JoinColumn(name = "shipper_id")
+    private Shipper shipper;
 
     @NotNull
-    private Integer user_id;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @NotNull
-    private Integer order_id;
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order orders;
 
     @NotNull
     private Integer timeLimit;
@@ -44,23 +51,24 @@ public class Delivery {
     private Integer is_confirm;
 
     @NotNull
-    private Integer is_keepsocial;
+    private Integer is_keep_social;
 
     @NotBlank
     @Enumerated(EnumType.STRING)
     private EDelivery delivery;
 
-    public Delivery(Integer id, @NotNull Integer shipper_id, @NotNull Integer user_id, @NotNull Integer order_id, @NotNull Integer timeLimit, @NotBlank @Size(max = 70) String address, @NotBlank String date
-            , @NotNull Integer is_confirm, @NotNull Integer is_keepsocial, @NotBlank EDelivery delivery) {
+    public Delivery(Integer id, @NotNull Shipper shipper, @NotNull User user, @NotNull Order orders
+            , @NotNull Integer timeLimit, @NotBlank @Size(max = 70) String address, @NotBlank String date
+            , @NotNull Integer is_confirm, @NotNull Integer is_keep_social, @NotBlank EDelivery delivery) {
         this.id = id;
-        this.shipper_id = shipper_id;
-        this.user_id = user_id;
-        this.order_id = order_id;
+        this.shipper = shipper;
+        this.user = user;
+        this.orders = orders;
         this.timeLimit = timeLimit;
         this.address = address;
         this.date = date;
         this.is_confirm = is_confirm;
-        this.is_keepsocial = is_keepsocial;
+        this.is_keep_social = is_keep_social;
         this.delivery = delivery;
     }
 
@@ -75,28 +83,28 @@ public class Delivery {
         this.id = id;
     }
 
-    public Integer getShipper_id() {
-        return shipper_id;
+    public Shipper getShipper() {
+        return shipper;
     }
 
-    public void setShipper_id(Integer shipper_id) {
-        this.shipper_id = shipper_id;
+    public void setShipper(Shipper shipper) {
+        this.shipper = shipper;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUser_id(User user) {
+        this.user = user;
     }
 
-    public Integer getOrder_id() {
-        return order_id;
+    public Order getOrders() {
+        return orders;
     }
 
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
+    public void setOrders(Order orders) {
+        this.orders = orders;
     }
 
     public Integer getTimeLimit() {
@@ -131,12 +139,12 @@ public class Delivery {
         this.is_confirm = is_confirm;
     }
 
-    public Integer getIs_keepsocial() {
-        return is_keepsocial;
+    public Integer getIs_keep_social() {
+        return is_keep_social;
     }
 
-    public void setIs_keepsocial(Integer is_keepsocial) {
-        this.is_keepsocial = is_keepsocial;
+    public void setIs_keep_social(Integer is_keep_social) {
+        this.is_keep_social = is_keep_social;
     }
 
     public EDelivery getDelivery() {

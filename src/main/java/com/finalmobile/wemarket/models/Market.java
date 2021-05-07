@@ -34,6 +34,11 @@ public class Market {
     @Size(max = 45)
     private String market_type;
 
+    @OneToOne(mappedBy = "market")
+    private Product product;
+
+
+
     public Market(Integer id, @NotNull @Size(max = 45) String name, @NotNull @Size(max = 45) String address,
                   @NotNull Integer open_time, @NotNull Integer close_time, @NotBlank @Size(max = 45) String market_type) {
         this.id = id;
