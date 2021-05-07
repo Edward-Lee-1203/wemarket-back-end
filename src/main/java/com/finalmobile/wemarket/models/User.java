@@ -13,10 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor
-@Getter
-@Setter
-@Table(	name = "users",
+@Table(	name = "user",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username")
         })
@@ -48,11 +45,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus user_status;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    @OneToOne(mappedBy = "user")
+    private Delivery delivery;
 
     public User(String username, String password) {
         this.username = username;
@@ -115,12 +109,11 @@ public class User {
         this.user_status = user_status;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Delivery getDelivery() {
+        return delivery;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
     }
-
 }

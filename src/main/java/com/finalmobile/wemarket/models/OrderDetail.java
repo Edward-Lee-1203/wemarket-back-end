@@ -8,21 +8,66 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@NoArgsConstructor
-@Setter
-@Getter
 @Table(name ="order_detail")
 public class OrderDetail {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
-    private  Integer product_id;
+    @ManyToOne
+    @JoinColumn(name="product_id")
+    private  Product product;
 
     @NotNull
-    private  Integer order_id;
+    @ManyToOne
+    @JoinColumn(name="order_id")
+    private  Order orders;
 
     @NotNull
     private  Integer kilogram;
+
+    public OrderDetail(Integer id, @NotNull Product product, @NotNull Order order
+            , @NotNull Integer kilogram) {
+        this.id = id;
+        this.product = product;
+        this.orders = order;
+        this.kilogram = kilogram;
+    }
+
+    public OrderDetail(){
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Order getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Order orders) {
+        this.orders = orders;
+    }
+
+    public Integer getKilogram() {
+        return kilogram;
+    }
+
+    public void setKilogram(Integer kilogram) {
+        this.kilogram = kilogram;
+    }
 }
