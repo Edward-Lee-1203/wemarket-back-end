@@ -4,7 +4,7 @@ import com.finalmobile.wemarket.payload.request.LoginRequest;
 import com.finalmobile.wemarket.payload.request.SignupRequest;
 import com.finalmobile.wemarket.payload.response.MessageResponse;
 import com.finalmobile.wemarket.repository.UserRepository;
-import com.finalmobile.wemarket.service.UserDetailsImpl;
+import com.finalmobile.wemarket.service.impl.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
