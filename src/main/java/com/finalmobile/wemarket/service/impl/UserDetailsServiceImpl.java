@@ -1,6 +1,5 @@
-package com.finalmobile.wemarket.service;
+package com.finalmobile.wemarket.service.impl;
 
-import com.finalmobile.wemarket.models.Market;
 import com.finalmobile.wemarket.models.User;
 import com.finalmobile.wemarket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

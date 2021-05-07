@@ -1,18 +1,12 @@
 package com.finalmobile.wemarket.models;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.aspectj.weaver.ast.Or;
+import com.finalmobile.wemarket.models.enums.EDelivery;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "delivery")
