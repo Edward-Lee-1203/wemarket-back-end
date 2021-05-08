@@ -7,7 +7,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,7 +18,7 @@ public class Shipper {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotBlank
     @Size(max = 50)
@@ -40,7 +42,7 @@ public class Shipper {
     public Shipper() {
     }
 
-    public Shipper(Integer id, @NotBlank @Size(max = 50) String name, @NotBlank @Size(max = 20) String phone
+    public Shipper(Long id, @NotBlank @Size(max = 50) String name, @NotBlank @Size(max = 20) String phone
             , @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password) {
         this.id = id;
         this.name = name;
@@ -49,11 +51,16 @@ public class Shipper {
         this.password = password;
     }
 
-    public Integer getId() {
+    public Shipper(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -95,5 +102,11 @@ public class Shipper {
 
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
+    }
+
+    public List<String> getRoles() {
+        List<String> roles = new ArrayList<>();
+        roles.add("shipper");
+        return roles;
     }
 }
