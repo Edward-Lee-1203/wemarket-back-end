@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(	name = "user",
@@ -46,6 +48,9 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User() {
     }
 
     public Long getId() {
@@ -110,5 +115,11 @@ public class User {
 
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
+    }
+
+    public List<String> getRoles() {
+        List<String> roles = new ArrayList<>();
+        roles.add("user");
+        return roles;
     }
 }
