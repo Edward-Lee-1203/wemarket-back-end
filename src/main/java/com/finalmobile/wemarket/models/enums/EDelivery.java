@@ -1,4 +1,4 @@
-package com.finalmobile.wemarket.models;
+package com.finalmobile.wemarket.models.enums;
 
 public enum EDelivery {
     DELIVERED,
