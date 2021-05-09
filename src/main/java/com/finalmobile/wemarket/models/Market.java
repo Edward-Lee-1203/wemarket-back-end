@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "market")
@@ -34,8 +35,8 @@ public class Market {
     @Size(max = 45)
     private String market_type;
 
-    @OneToOne(mappedBy = "market")
-    private Product product;
+    @OneToMany(mappedBy = "market")
+    private List<Product> products;
 
 
 

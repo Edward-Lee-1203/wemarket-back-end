@@ -106,7 +106,7 @@ public class Shipper {
 
     public List<String> getRoles() {
         List<String> roles = new ArrayList<>();
-        roles.add("shipper");
+        roles.add("ROLE_SHIPPER");
         return roles;
     }
 }

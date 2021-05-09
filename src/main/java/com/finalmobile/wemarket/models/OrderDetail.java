@@ -59,8 +59,8 @@ public class OrderDetail {
         return orders;
     }
 
-    public void setOrders(Order orders) {
-        this.orders = orders;
+    public void setOrders(Order order) {
+        this.orders = order;
     }
 
     public Integer getKilogram() {

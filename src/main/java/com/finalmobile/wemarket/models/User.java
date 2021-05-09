@@ -119,7 +119,7 @@ public class User {
 
     public List<String> getRoles() {
         List<String> roles = new ArrayList<>();
-        roles.add("user");
+        roles.add("ROLE_USER");
         return roles;
     }
 }

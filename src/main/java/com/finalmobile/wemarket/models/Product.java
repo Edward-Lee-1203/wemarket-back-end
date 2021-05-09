@@ -26,7 +26,7 @@ public class Product {
     private  Integer price;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "market_id")
     private  Market market;
 

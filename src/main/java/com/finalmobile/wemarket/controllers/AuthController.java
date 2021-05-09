@@ -48,6 +48,12 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+        if (!userRepository.existsByUsername(loginRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is not exits!"));
+        }
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -83,8 +89,6 @@ public class AuthController {
                         Shipper shipper = new Shipper(signUpRequest.getUsername(),
                                 encoder.encode(signUpRequest.getPassword()));
                         shipperRepository.save(shipper);
-
-
                         break;
                     default:
                         User user = new User(signUpRequest.getUsername(),
