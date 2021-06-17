@@ -25,6 +25,10 @@ public class Product {
     @NotNull
     private  Integer price;
 
+    private  Integer discount;
+
+    private String urlImg;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "market_id")
@@ -37,12 +41,15 @@ public class Product {
     @Size(max = 45)
     private String product_type;
 
-    public Product(Integer id, @NotNull @Size(max = 45) String name, @NotNull Integer price,
-                   @NotNull Market market, @NotBlank @Size(max = 45) String product_type) {
+    public Product(Integer id, String name, Integer price, Integer discount, String urlImg, Market market,
+                   List<OrderDetail> orderDetails, String product_type) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.discount = discount;
+        this.urlImg = urlImg;
         this.market = market;
+        this.orderDetails = orderDetails;
         this.product_type = product_type;
     }
 
@@ -96,5 +103,21 @@ public class Product {
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
+
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
     }
 }

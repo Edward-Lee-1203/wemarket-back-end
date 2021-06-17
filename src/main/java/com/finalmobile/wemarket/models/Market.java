@@ -28,6 +28,10 @@ public class Market {
     @NotNull
     private  Integer open_time;
 
+    private  String longitude;
+
+    private  String latitude;
+
     @NotNull
     private  Integer close_time;
 
@@ -38,16 +42,17 @@ public class Market {
     @OneToMany(mappedBy = "market")
     private List<Product> products;
 
-
-
-    public Market(Integer id, @NotNull @Size(max = 45) String name, @NotNull @Size(max = 45) String address,
-                  @NotNull Integer open_time, @NotNull Integer close_time, @NotBlank @Size(max = 45) String market_type) {
+    public Market(Integer id, String name, String address, Integer open_time, String longitude, String latitude,
+                  Integer close_time, String market_type, List<Product> products) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.open_time = open_time;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.close_time = close_time;
         this.market_type = market_type;
+        this.products = products;
     }
 
     public Market() {
@@ -99,5 +104,29 @@ public class Market {
 
     public void setMarket_type(String market_type) {
         this.market_type = market_type;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
