@@ -44,6 +44,12 @@ public class Delivery {
     @NotNull
     private Integer is_confirm;
 
+    private Integer deliveryFee;
+
+    private Float longitude;
+
+    private  Float latitude;
+
     @NotNull
     private Integer is_keep_social;
 
@@ -51,9 +57,9 @@ public class Delivery {
     @Enumerated(EnumType.STRING)
     private EDelivery delivery;
 
-    public Delivery(Integer id, @NotNull Shipper shipper, @NotNull User user, @NotNull Order orders
-            , @NotNull Integer timeLimit, @NotBlank @Size(max = 70) String address, @NotBlank String date
-            , @NotNull Integer is_confirm, @NotNull Integer is_keep_social, @NotBlank EDelivery delivery) {
+    public Delivery(Integer id, Shipper shipper, User user, Order orders, Integer timeLimit, String address, String date,
+                    Integer is_confirm, Integer deliveryFee, Float longitude, Float latitude, Integer is_keep_social,
+                    EDelivery delivery) {
         this.id = id;
         this.shipper = shipper;
         this.user = user;
@@ -62,6 +68,9 @@ public class Delivery {
         this.address = address;
         this.date = date;
         this.is_confirm = is_confirm;
+        this.deliveryFee = deliveryFee;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.is_keep_social = is_keep_social;
         this.delivery = delivery;
     }
@@ -147,5 +156,33 @@ public class Delivery {
 
     public void setDelivery(EDelivery delivery) {
         this.delivery = delivery;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Integer getDeliveryFee() {
+        return deliveryFee;
+    }
+
+    public void setDeliveryFee(Integer deliveryFee) {
+        this.deliveryFee = deliveryFee;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
     }
 }

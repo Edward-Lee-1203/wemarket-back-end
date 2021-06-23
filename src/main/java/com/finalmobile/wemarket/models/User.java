@@ -35,6 +35,10 @@ public class User {
     @Size(max = 20)
     private String phone;
 
+    private Float longitude;
+
+    private  Float latitude;
+
     @NotNull
     private int gender;
 
@@ -48,6 +52,20 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User(Long id, String username, String password, String name, String phone, Float longitude, Float latitude,
+                int gender, UserStatus user_status, Delivery delivery) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.phone = phone;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.gender = gender;
+        this.user_status = user_status;
+        this.delivery = delivery;
     }
 
     public User() {
@@ -121,5 +139,21 @@ public class User {
         List<String> roles = new ArrayList<>();
         roles.add("ROLE_USER");
         return roles;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
     }
 }

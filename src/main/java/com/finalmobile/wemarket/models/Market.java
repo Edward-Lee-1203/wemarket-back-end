@@ -32,6 +32,8 @@ public class Market {
 
     private  String latitude;
 
+    private Float itemsLeft;
+
     @NotNull
     private  Integer close_time;
 
@@ -43,13 +45,14 @@ public class Market {
     private List<Product> products;
 
     public Market(Integer id, String name, String address, Integer open_time, String longitude, String latitude,
-                  Integer close_time, String market_type, List<Product> products) {
+                  Float itemsLeft, Integer close_time, String market_type, List<Product> products) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.open_time = open_time;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.itemsLeft = itemsLeft;
         this.close_time = close_time;
         this.market_type = market_type;
         this.products = products;
@@ -128,5 +131,13 @@ public class Market {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public Float getItemsLeft() {
+        return itemsLeft;
+    }
+
+    public void setItemsLeft(Float itemsLeft) {
+        this.itemsLeft = itemsLeft;
     }
 }
