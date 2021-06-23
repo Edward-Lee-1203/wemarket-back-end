@@ -35,7 +35,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority
-                ("user")).collect(Collectors.toList());
+                ("ROLE_USER")).collect(Collectors.toList());
         return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
@@ -45,7 +45,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public static UserDetailsImpl build(Shipper shipper) {
         List<GrantedAuthority> authorities = shipper.getRoles().stream().map(role -> new SimpleGrantedAuthority
-                ("shipper")).collect(Collectors.toList());
+                ("ROLE_SHIPPER")).collect(Collectors.toList());
         return new UserDetailsImpl(
                 shipper.getId(),
                 shipper.getUsername(),

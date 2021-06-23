@@ -26,10 +26,10 @@ public class OrderDetail {
     private  Order orders;
 
     @NotNull
-    private  Integer kilogram;
+    private  Float kilogram;
 
     public OrderDetail(Integer id, @NotNull Product product, @NotNull Order order
-            , @NotNull Integer kilogram) {
+            , @NotNull Float kilogram) {
         this.id = id;
         this.product = product;
         this.orders = order;
@@ -59,15 +59,15 @@ public class OrderDetail {
         return orders;
     }
 
-    public void setOrders(Order orders) {
-        this.orders = orders;
+    public void setOrders(Order order) {
+        this.orders = order;
     }
 
-    public Integer getKilogram() {
+    public Float getKilogram() {
         return kilogram;
     }
 
-    public void setKilogram(Integer kilogram) {
+    public void setKilogram(Float kilogram) {
         this.kilogram = kilogram;
     }
 }
