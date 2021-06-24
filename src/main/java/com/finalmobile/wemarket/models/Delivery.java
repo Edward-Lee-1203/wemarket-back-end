@@ -16,7 +16,7 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
+   /* @NotNull
     @OneToOne
     @JoinColumn(name = "shipper_id")
     private Shipper shipper;
@@ -29,7 +29,7 @@ public class Delivery {
     @NotNull
     @OneToOne
     @JoinColumn(name = "order_id")
-    private Order orders;
+    private Order orders;*/
 
     @NotNull
     private Integer timeLimit;
@@ -61,9 +61,9 @@ public class Delivery {
                     Integer is_confirm, Integer deliveryFee, Float longitude, Float latitude, Integer is_keep_social,
                     EDelivery delivery) {
         this.id = id;
-        this.shipper = shipper;
+       /* this.shipper = shipper;
         this.user = user;
-        this.orders = orders;
+        this.orders = orders;*/
         this.timeLimit = timeLimit;
         this.address = address;
         this.date = date;
@@ -86,7 +86,7 @@ public class Delivery {
         this.id = id;
     }
 
-    public Shipper getShipper() {
+    /*public Shipper getShipper() {
         return shipper;
     }
 
@@ -108,7 +108,7 @@ public class Delivery {
 
     public void setOrders(Order orders) {
         this.orders = orders;
-    }
+    }*/
 
     public Integer getTimeLimit() {
         return timeLimit;
@@ -158,9 +158,9 @@ public class Delivery {
         this.delivery = delivery;
     }
 
-    public void setUser(User user) {
+   /* public void setUser(User user) {
         this.user = user;
-    }
+    }*/
 
     public Integer getDeliveryFee() {
         return deliveryFee;

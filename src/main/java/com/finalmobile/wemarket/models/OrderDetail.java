@@ -15,10 +15,10 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
+    /*@NotNull
     @ManyToOne
     @JoinColumn(name="product_id")
-    private  Product product;
+    private  Product product;*/
 
     /*@NotNull
     @ManyToOne
@@ -31,7 +31,7 @@ public class OrderDetail {
     public OrderDetail(Integer id, @NotNull Product product, @NotNull Order order
             , @NotNull Float kilogram) {
         this.id = id;
-        this.product = product;
+        //this.product = product;
         //this.orders = order;
         this.kilogram = kilogram;
     }
@@ -47,13 +47,13 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public Product getProduct() {
+   /* public Product getProduct() {
         return product;
     }
 
     public void setProduct(Product product) {
         this.product = product;
-    }
+    }*/
 
     /*public Order getOrders() {
         return orders;
