@@ -1,9 +1,9 @@
 package com.finalmobile.wemarket.controllers;
 
-import com.finalmobile.wemarket.models.Order;
+import com.finalmobile.wemarket.models.OrderDetail;
 import com.finalmobile.wemarket.models.Product;
 import com.finalmobile.wemarket.payload.response.MessageResponse;
-import com.finalmobile.wemarket.repository.OrderRepository;
+import com.finalmobile.wemarket.repository.OrderDetailRepository;
 import com.finalmobile.wemarket.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,39 +16,39 @@ import java.util.Optional;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
-public class ProductController {
+public class OrderDetailController {
 
     @Autowired
-    ProductRepository productRepository;
+    OrderDetailRepository orderDetailRepository;
 
-    @GetMapping("product")
-    public ResponseEntity<?> getProducts(){
-        List<Product> productArrayList = productRepository.findAll();
-        return ResponseEntity.ok(productArrayList);
+    @GetMapping("orderDetail")
+    public ResponseEntity<?> getOrderDetails(){
+        List<OrderDetail> orderDetailsArrayList = orderDetailRepository.findAll();
+        return ResponseEntity.ok(orderDetailsArrayList);
     }
 
-    @PostMapping("product")
-    public ResponseEntity<?> addProducts(Product product){
-        productRepository.save(product);
-        return ResponseEntity.ok(new MessageResponse("Add product successfully"));
+    @PostMapping("orderDetail")
+    public ResponseEntity<?> addOrderDetail(@RequestBody OrderDetail orderDetail){
+        orderDetailRepository.save(orderDetail);
+        return ResponseEntity.ok(new MessageResponse("Add order detail successfully"));
     }
 
-    @GetMapping("product/{id}")
-    public ResponseEntity<?> getProductEdit(@PathVariable Long id){
-        Optional<Product> product = productRepository.findById(id);
-        return new ResponseEntity<>(product, HttpStatus.OK);
+    @GetMapping("orderDetail/{id}")
+    public ResponseEntity<?> getOrderDetailEdit(@PathVariable Long id){
+        Optional<OrderDetail> orderDetail = orderDetailRepository.findById(id);
+        return new ResponseEntity<>(orderDetail, HttpStatus.OK);
     }
 
-    @PutMapping("product")
-    public ResponseEntity<?> editProducts(Product product){
-        productRepository.save(product);
-        return ResponseEntity.ok(new MessageResponse("Edit product successfully"));
+    @PutMapping("orderDetail")
+    public ResponseEntity<?> editOrderDetail(@RequestBody OrderDetail orderDetail){
+        orderDetailRepository.save(orderDetail);
+        return ResponseEntity.ok(new MessageResponse("Edit order detail successfully"));
     }
 
-    @DeleteMapping("product/{id}")
-    public ResponseEntity<?> deleteOrders(@PathVariable Long id){
-        productRepository.deleteById(id);
-        return ResponseEntity.ok(new MessageResponse("Delete product successfully"));
+    @DeleteMapping("orderDetail/{id}")
+    public ResponseEntity<?> deleteOrderDetail(@PathVariable Long id){
+        orderDetailRepository.deleteById(id);
+        return ResponseEntity.ok(new MessageResponse("Delete order detail successfully"));
     }
 
 

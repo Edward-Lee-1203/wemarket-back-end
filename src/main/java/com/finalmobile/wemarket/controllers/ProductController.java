@@ -1,55 +1,54 @@
 package com.finalmobile.wemarket.controllers;
 
 import com.finalmobile.wemarket.models.Order;
+import com.finalmobile.wemarket.models.Product;
 import com.finalmobile.wemarket.payload.response.MessageResponse;
 import com.finalmobile.wemarket.repository.OrderRepository;
+import com.finalmobile.wemarket.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.config.RepositoryNameSpaceHandler;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
-public class OrderController {
+public class ProductController {
 
     @Autowired
-    OrderRepository orderRepository;
+    ProductRepository productRepository;
 
-    @GetMapping("order")
-    public ResponseEntity<?> getOrders(){
-        List<Order> orderArrayList = orderRepository.findAll();
-        return ResponseEntity.ok(orderArrayList);
+    @GetMapping("product")
+    public ResponseEntity<?> getProducts(){
+        List<Product> productArrayList = productRepository.findAll();
+        return ResponseEntity.ok(productArrayList);
     }
 
-    @PostMapping("order")
-    public ResponseEntity<?> addOrders(Order order){
-        orderRepository.save(order);
-        return ResponseEntity.ok(new MessageResponse("Add order successfully"));
+    @PostMapping("product")
+    public ResponseEntity<?> addProducts(@RequestBody  Product product){
+        productRepository.save(product);
+        return ResponseEntity.ok(new MessageResponse("Add product successfully"));
     }
 
-    @GetMapping("order/{id}")
-    public ResponseEntity<?> getOrdersEdit(@PathVariable Integer id){
-        Order o = orderRepository.findById(id).get();
-        return ResponseEntity.ok(o);
+    @GetMapping("product/{id}")
+    public ResponseEntity<?> getProductEdit(@PathVariable Integer id){
+        Product product = productRepository.findById(id).get();
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @PutMapping("order")
-    public ResponseEntity<?> editOrders(Order order){
-        orderRepository.save(order);
-        return ResponseEntity.ok(new MessageResponse("Edit order successfully"));
+    @PutMapping("product/{id}")
+    public ResponseEntity<?> editProducts(@RequestBody Product product){
+        productRepository.save(product);
+        return ResponseEntity.ok(new MessageResponse("Edit product successfully"));
     }
 
-    @DeleteMapping("order/{id}")
+    @DeleteMapping("product/{id}")
     public ResponseEntity<?> deleteOrders(@PathVariable Integer id){
-        orderRepository.deleteById(id);
-        return ResponseEntity.ok(new MessageResponse("Delete order successfully"));
+        productRepository.deleteById(id);
+        return ResponseEntity.ok(new MessageResponse("Delete product successfully"));
     }
 
 

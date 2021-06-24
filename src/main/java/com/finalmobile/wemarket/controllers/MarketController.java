@@ -1,9 +1,9 @@
 package com.finalmobile.wemarket.controllers;
 
-import com.finalmobile.wemarket.models.Order;
+import com.finalmobile.wemarket.models.Market;
 import com.finalmobile.wemarket.models.Product;
 import com.finalmobile.wemarket.payload.response.MessageResponse;
-import com.finalmobile.wemarket.repository.OrderRepository;
+import com.finalmobile.wemarket.repository.MarketRepository;
 import com.finalmobile.wemarket.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,39 +16,39 @@ import java.util.Optional;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
-public class ProductController {
+public class MarketController {
 
     @Autowired
-    ProductRepository productRepository;
+    MarketRepository marketRepository;
 
-    @GetMapping("product")
-    public ResponseEntity<?> getProducts(){
-        List<Product> productArrayList = productRepository.findAll();
+    @GetMapping("market")
+    public ResponseEntity<?> getMarkets(){
+        List<Market> productArrayList = marketRepository.findAll();
         return ResponseEntity.ok(productArrayList);
     }
 
-    @PostMapping("product")
-    public ResponseEntity<?> addProducts(Product product){
-        productRepository.save(product);
-        return ResponseEntity.ok(new MessageResponse("Add product successfully"));
+    @PostMapping("market")
+    public ResponseEntity<?> addMarkets(@RequestBody Market market){
+        marketRepository.save(market);
+        return ResponseEntity.ok(new MessageResponse("Add market successfully"));
     }
 
-    @GetMapping("product/{id}")
-    public ResponseEntity<?> getProductEdit(@PathVariable Long id){
-        Optional<Product> product = productRepository.findById(id);
-        return new ResponseEntity<>(product, HttpStatus.OK);
+    @GetMapping("market/{id}")
+    public ResponseEntity<?> getMarketEdit(@PathVariable Long id){
+        Optional<Market> market = marketRepository.findById(id);
+        return new ResponseEntity<>(market, HttpStatus.OK);
     }
 
-    @PutMapping("product")
-    public ResponseEntity<?> editProducts(Product product){
-        productRepository.save(product);
-        return ResponseEntity.ok(new MessageResponse("Edit product successfully"));
+    @PutMapping("market")
+    public ResponseEntity<?> editMarkets(@RequestBody Market market){
+        marketRepository.save(market);
+        return ResponseEntity.ok(new MessageResponse("Edit market successfully"));
     }
 
-    @DeleteMapping("product/{id}")
-    public ResponseEntity<?> deleteOrders(@PathVariable Long id){
-        productRepository.deleteById(id);
-        return ResponseEntity.ok(new MessageResponse("Delete product successfully"));
+    @DeleteMapping("market/{id}")
+    public ResponseEntity<?> deleteMarkets(@PathVariable Long id){
+        marketRepository.deleteById(id);
+        return ResponseEntity.ok(new MessageResponse("Delete market successfully"));
     }
 
 

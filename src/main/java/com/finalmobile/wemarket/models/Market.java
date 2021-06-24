@@ -28,9 +28,9 @@ public class Market {
     @NotNull
     private  Integer open_time;
 
-    private  String longitude;
+    private  Float longitude;
 
-    private  String latitude;
+    private  Float latitude;
 
     private Float itemsLeft;
 
@@ -41,10 +41,10 @@ public class Market {
     @Size(max = 45)
     private String market_type;
 
-    @OneToMany(mappedBy = "market")
-    private List<Product> products;
+    /*@OneToMany(mappedBy = "market")
+    private List<Product> products;*/
 
-    public Market(Integer id, String name, String address, Integer open_time, String longitude, String latitude,
+    public Market(Integer id, String name, String address, Integer open_time, Float longitude, Float latitude,
                   Float itemsLeft, Integer close_time, String market_type, List<Product> products) {
         this.id = id;
         this.name = name;
@@ -55,7 +55,7 @@ public class Market {
         this.itemsLeft = itemsLeft;
         this.close_time = close_time;
         this.market_type = market_type;
-        this.products = products;
+        //this.products = products;
     }
 
     public Market() {
@@ -109,29 +109,29 @@ public class Market {
         this.market_type = market_type;
     }
 
-    public String getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public Float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public List<Product> getProducts() {
+    /*public List<Product> getProducts() {
         return products;
     }
 
     public void setProducts(List<Product> products) {
         this.products = products;
-    }
+    }*/
 
     public Float getItemsLeft() {
         return itemsLeft;

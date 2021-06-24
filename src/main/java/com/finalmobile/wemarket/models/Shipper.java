@@ -1,5 +1,7 @@
 package com.finalmobile.wemarket.models;
 
+import com.finalmobile.wemarket.models.enums.EDelivery;
+import com.finalmobile.wemarket.models.enums.UserStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,6 +37,10 @@ public class Shipper {
     private Float longitude;
 
     private  Float latitude;
+
+    @NotBlank
+    @Enumerated(EnumType.STRING)
+    private EDelivery shipper_status;
 
     @NotBlank
     @Size(max = 120)

@@ -1,10 +1,10 @@
 package com.finalmobile.wemarket.controllers;
 
-import com.finalmobile.wemarket.models.Order;
 import com.finalmobile.wemarket.models.Product;
+import com.finalmobile.wemarket.models.Shipper;
 import com.finalmobile.wemarket.payload.response.MessageResponse;
-import com.finalmobile.wemarket.repository.OrderRepository;
 import com.finalmobile.wemarket.repository.ProductRepository;
+import com.finalmobile.wemarket.repository.ShipperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,39 +16,39 @@ import java.util.Optional;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
-public class ProductController {
+public class ShipperController {
 
     @Autowired
-    ProductRepository productRepository;
+    ShipperRepository shipperRepository;
 
-    @GetMapping("product")
-    public ResponseEntity<?> getProducts(){
-        List<Product> productArrayList = productRepository.findAll();
-        return ResponseEntity.ok(productArrayList);
+    @GetMapping("shipper")
+    public ResponseEntity<?> getShippers(){
+        List<Shipper> shippersArrayList = shipperRepository.findAll();
+        return ResponseEntity.ok(shippersArrayList);
     }
 
-    @PostMapping("product")
-    public ResponseEntity<?> addProducts(Product product){
-        productRepository.save(product);
-        return ResponseEntity.ok(new MessageResponse("Add product successfully"));
+    @PostMapping("shipper")
+    public ResponseEntity<?> addProducts(@RequestBody Shipper shipper){
+        shipperRepository.save(shipper);
+        return ResponseEntity.ok(new MessageResponse("Add shipper successfully"));
     }
 
-    @GetMapping("product/{id}")
-    public ResponseEntity<?> getProductEdit(@PathVariable Long id){
-        Optional<Product> product = productRepository.findById(id);
-        return new ResponseEntity<>(product, HttpStatus.OK);
+    @GetMapping("shipper/{id}")
+    public ResponseEntity<?> getShipperEdit(@PathVariable Long id){
+        Optional<Shipper> shipper = shipperRepository.findById(id);
+        return new ResponseEntity<>(shipper, HttpStatus.OK);
     }
 
-    @PutMapping("product")
-    public ResponseEntity<?> editProducts(Product product){
-        productRepository.save(product);
-        return ResponseEntity.ok(new MessageResponse("Edit product successfully"));
+    @PutMapping("shipper")
+    public ResponseEntity<?> editShipper(@RequestBody Shipper shipper){
+        shipperRepository.save(shipper);
+        return ResponseEntity.ok(new MessageResponse("Edit shipper successfully"));
     }
 
-    @DeleteMapping("product/{id}")
-    public ResponseEntity<?> deleteOrders(@PathVariable Long id){
-        productRepository.deleteById(id);
-        return ResponseEntity.ok(new MessageResponse("Delete product successfully"));
+    @DeleteMapping("shipper/{id}")
+    public ResponseEntity<?> deleteShippers(@PathVariable Long id){
+        shipperRepository.deleteById(id);
+        return ResponseEntity.ok(new MessageResponse("Delete shipper successfully"));
     }
 
 
