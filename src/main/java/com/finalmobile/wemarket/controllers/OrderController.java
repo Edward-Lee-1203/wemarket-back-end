@@ -32,19 +32,13 @@ public class OrderController {
     @PostMapping("order")
     public ResponseEntity<?> addOrders(@RequestBody Order order){
         orderRepository.save(order);
-        return ResponseEntity.ok(new MessageResponse("Add order successfully"));
+        return ResponseEntity.ok(order);
     }
 
     @GetMapping("order/{id}")
     public ResponseEntity<?> getOrdersEdit(@PathVariable Long id){
         Optional<Order> o = orderRepository.findById(id);
         return new ResponseEntity<>(o, HttpStatus.OK);
-    }
-
-    @PutMapping("order")
-    public ResponseEntity<?> editOrders(@RequestBody Order order){
-        orderRepository.save(order);
-        return ResponseEntity.ok(new MessageResponse("Edit order successfully"));
     }
 
     @DeleteMapping("order/{id}")

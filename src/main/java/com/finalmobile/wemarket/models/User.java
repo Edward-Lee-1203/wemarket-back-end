@@ -46,16 +46,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus user_status;
 
-    @OneToOne(mappedBy = "user")
-    private Delivery delivery;
-
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
     public User(Long id, String username, String password, String name, String phone, Float longitude, Float latitude,
-                int gender, UserStatus user_status, Delivery delivery) {
+                int gender, UserStatus user_status) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -65,7 +62,6 @@ public class User {
         this.latitude = latitude;
         this.gender = gender;
         this.user_status = user_status;
-        this.delivery = delivery;
     }
 
     public User() {
@@ -125,14 +121,6 @@ public class User {
 
     public void setUser_status(UserStatus user_status) {
         this.user_status = user_status;
-    }
-
-    public Delivery getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
     }
 
     public List<String> getRoles() {

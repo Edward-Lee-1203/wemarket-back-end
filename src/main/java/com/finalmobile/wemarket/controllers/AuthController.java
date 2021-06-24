@@ -84,19 +84,20 @@ public class AuthController {
         if (strRoles == null) {
             throw  new RuntimeException("Error: Role is not found.");
         } else {
-            strRoles.forEach(role -> {
+            for(String role : strRoles){
                 switch (role) {
                     case "shipper":
                         Shipper shipper = new Shipper(signUpRequest.getUsername(),
                                 encoder.encode(signUpRequest.getPassword()));
                         shipperRepository.save(shipper);
-                        break;
+                        return ResponseEntity.ok(shipper);
                     default:
                         User user = new User(signUpRequest.getUsername(),
                                 encoder.encode(signUpRequest.getPassword()));
                         userRepository.save(user);
+                        return ResponseEntity.ok(user);
                 }
-            });
+            }
         }
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

@@ -46,14 +46,11 @@ public class Shipper {
     @Size(max = 120)
     private String password;
 
-    @OneToOne(mappedBy = "shipper")
-    private Delivery delivery;
-
     public Shipper() {
     }
 
     public Shipper(Long id, String name, String phone, String username, Float longitude, Float latitude,
-                   String password, Delivery delivery) {
+                   String password) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -61,7 +58,6 @@ public class Shipper {
         this.longitude = longitude;
         this.latitude = latitude;
         this.password = password;
-        this.delivery = delivery;
     }
 
     public Shipper(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password) {
@@ -107,14 +103,6 @@ public class Shipper {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Delivery getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
     }
 
     public List<String> getRoles() {

@@ -30,7 +30,7 @@ public class ProductController {
     @PostMapping("product")
     public ResponseEntity<?> addProducts(@RequestBody  Product product){
         productRepository.save(product);
-        return ResponseEntity.ok(new MessageResponse("Add product successfully"));
+        return ResponseEntity.ok(product);
     }
 
     @GetMapping("product/{id}")
@@ -38,11 +38,10 @@ public class ProductController {
         Product product = productRepository.findById(id).get();
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
-
-    @PutMapping("product/{id}")
-    public ResponseEntity<?> editProducts(@RequestBody Product product){
-        productRepository.save(product);
-        return ResponseEntity.ok(new MessageResponse("Edit product successfully"));
+    @GetMapping("product/market/{id}")
+    public ResponseEntity<?> getProductByMarketId(@PathVariable Integer id){
+        List<Product> products = productRepository.findProductByMarketId(id);
+        return ResponseEntity.ok(products);
     }
 
     @DeleteMapping("product/{id}")

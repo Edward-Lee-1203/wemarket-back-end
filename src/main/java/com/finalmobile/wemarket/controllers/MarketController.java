@@ -30,19 +30,13 @@ public class MarketController {
     @PostMapping("market")
     public ResponseEntity<?> addMarkets(@RequestBody Market market){
         marketRepository.save(market);
-        return ResponseEntity.ok(new MessageResponse("Add market successfully"));
+        return ResponseEntity.ok(market);
     }
 
     @GetMapping("market/{id}")
     public ResponseEntity<?> getMarketEdit(@PathVariable Long id){
         Optional<Market> market = marketRepository.findById(id);
         return new ResponseEntity<>(market, HttpStatus.OK);
-    }
-
-    @PutMapping("market")
-    public ResponseEntity<?> editMarkets(@RequestBody Market market){
-        marketRepository.save(market);
-        return ResponseEntity.ok(new MessageResponse("Edit market successfully"));
     }
 
     @DeleteMapping("market/{id}")

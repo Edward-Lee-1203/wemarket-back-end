@@ -30,7 +30,7 @@ public class OrderDetailController {
     @PostMapping("orderDetail")
     public ResponseEntity<?> addOrderDetail(@RequestBody OrderDetail orderDetail){
         orderDetailRepository.save(orderDetail);
-        return ResponseEntity.ok(new MessageResponse("Add order detail successfully"));
+        return ResponseEntity.ok(orderDetail);
     }
 
     @GetMapping("orderDetail/{id}")
@@ -39,10 +39,10 @@ public class OrderDetailController {
         return new ResponseEntity<>(orderDetail, HttpStatus.OK);
     }
 
-    @PutMapping("orderDetail")
-    public ResponseEntity<?> editOrderDetail(@RequestBody OrderDetail orderDetail){
-        orderDetailRepository.save(orderDetail);
-        return ResponseEntity.ok(new MessageResponse("Edit order detail successfully"));
+    @GetMapping("orderDetail/order/{id}")
+    public ResponseEntity<?> getOrderDetailByOrderId(@PathVariable Long id){
+        Optional<OrderDetail> orderDetail = orderDetailRepository.findByOrderId(id);
+        return new ResponseEntity<>(orderDetail, HttpStatus.OK);
     }
 
     @DeleteMapping("orderDetail/{id}")

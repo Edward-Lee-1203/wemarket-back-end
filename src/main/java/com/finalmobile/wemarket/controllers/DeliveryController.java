@@ -2,6 +2,7 @@ package com.finalmobile.wemarket.controllers;
 
 import com.finalmobile.wemarket.models.Delivery;
 import com.finalmobile.wemarket.models.Product;
+import com.finalmobile.wemarket.models.enums.EDelivery;
 import com.finalmobile.wemarket.payload.response.MessageResponse;
 import com.finalmobile.wemarket.repository.DeliveryRepository;
 import com.finalmobile.wemarket.repository.ProductRepository;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -28,20 +31,17 @@ public class DeliveryController {
 
     @PostMapping("delivery")
     public ResponseEntity<?> addDelivery(@RequestBody Delivery delivery){
+        if(delivery.getDate()==null) delivery.setDate(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        if(delivery.getIs_confirm()==null) delivery.setIs_confirm(0);
+        if(delivery.getDelivery()==null) delivery.setDelivery(EDelivery.CONFIRMING);
         deliveryRepository.save(delivery);
-        return ResponseEntity.ok(new MessageResponse("Add delivery successfully"));
+        return ResponseEntity.ok(delivery);
     }
 
     @GetMapping("delivery/{id}")
     public ResponseEntity<?> getDeliveryEdit(@PathVariable Integer id){
         Delivery delivery = deliveryRepository.findById(id).get();
-        return new ResponseEntity<>(delivery, HttpStatus.OK);
-    }
-
-    @PutMapping("delivery/{id}")
-    public ResponseEntity<?> editDelivery(@RequestBody Delivery delivery){
-        deliveryRepository.save(delivery);
-        return ResponseEntity.ok(new MessageResponse("Edit delivery successfully"));
+        return ResponseEntity.ok(delivery);
     }
 
     @DeleteMapping("delivery/{id}")

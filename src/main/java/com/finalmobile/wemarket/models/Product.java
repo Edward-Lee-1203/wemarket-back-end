@@ -34,22 +34,17 @@ public class Product {
     @JoinColumn(name = "market_id")
     private  Market market;
 
-    @OneToMany(mappedBy = "product")
-    private List<OrderDetail> orderDetails;
-
     @NotBlank
     @Size(max = 45)
     private String product_type;
 
-    public Product(Integer id, String name, Integer price, Integer discount, String urlImg, Market market,
-                   List<OrderDetail> orderDetails, String product_type) {
+    public Product(Integer id, String name, Integer price, Integer discount, String urlImg, Market market, String product_type) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.discount = discount;
         this.urlImg = urlImg;
         this.market = market;
-        this.orderDetails = orderDetails;
         this.product_type = product_type;
     }
 
@@ -95,14 +90,6 @@ public class Product {
 
     public void setProduct_type(String product_type) {
         this.product_type = product_type;
-    }
-
-    public List<OrderDetail> getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(List<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
     }
 
     public Integer getDiscount() {
