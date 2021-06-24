@@ -20,10 +20,10 @@ public class OrderDetail {
     @JoinColumn(name="product_id")
     private  Product product;
 
-    @NotNull
+    /*@NotNull
     @ManyToOne
     @JoinColumn(name="order_id")
-    private  Order orders;
+    private  Order orders;*/
 
     @NotNull
     private  Float kilogram;
@@ -32,7 +32,7 @@ public class OrderDetail {
             , @NotNull Float kilogram) {
         this.id = id;
         this.product = product;
-        this.orders = order;
+        //this.orders = order;
         this.kilogram = kilogram;
     }
 
@@ -55,13 +55,13 @@ public class OrderDetail {
         this.product = product;
     }
 
-    public Order getOrders() {
+    /*public Order getOrders() {
         return orders;
     }
 
     public void setOrders(Order order) {
         this.orders = order;
-    }
+    }*/
 
     public Float getKilogram() {
         return kilogram;
