@@ -48,7 +48,8 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        if (!userRepository.existsByUsername(loginRequest.getUsername())) {
+        if (!userRepository.existsByUsername(loginRequest.getUsername())
+                && !shipperRepository.existsByUsername(loginRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is not exits!"));
