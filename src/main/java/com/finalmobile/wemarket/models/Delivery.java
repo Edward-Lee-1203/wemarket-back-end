@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name = "delivery")
@@ -16,54 +17,57 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "shipper_id")
     private Shipper shipper;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @NotNull
     @OneToOne
     @JoinColumn(name = "order_id")
-    private Order orders;
+    private Order order;
 
-    @NotNull
     private Integer timeLimit;
 
     @NotBlank
     @Size(max = 70)
     private String address;
 
-    @NotBlank
     private String date;
 
-    @NotNull
     private Integer is_confirm;
 
+    private Integer deliveryFee;
+
     @NotNull
+    private Float longitude;
+
+    @NotNull
+    private  Float latitude;
+
     private Integer is_keep_social;
 
-    @NotBlank
     @Enumerated(EnumType.STRING)
     private EDelivery delivery;
 
-    public Delivery(Integer id, @NotNull Shipper shipper, @NotNull User user, @NotNull Order orders
-            , @NotNull Integer timeLimit, @NotBlank @Size(max = 70) String address, @NotBlank String date
-            , @NotNull Integer is_confirm, @NotNull Integer is_keep_social, @NotBlank EDelivery delivery) {
+    public Delivery(Integer id, Shipper shipper, User user, Order order, Integer timeLimit, String address, String date, Integer is_confirm, Integer deliveryFee, Float longitude, Float latitude, Integer is_keep_social, EDelivery delivery) {
         this.id = id;
         this.shipper = shipper;
         this.user = user;
-        this.orders = orders;
+        this.order = order;
         this.timeLimit = timeLimit;
         this.address = address;
-        this.date = date;
-        this.is_confirm = is_confirm;
+        this.date = date==null?new Date().toString():date;
+        this.is_confirm = is_confirm==null?0:1;
+        this.deliveryFee = deliveryFee;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.is_keep_social = is_keep_social;
-        this.delivery = delivery;
+        this.delivery = delivery==null?EDelivery.CONFIRMING:delivery;
     }
 
     public Delivery() {
@@ -89,16 +93,16 @@ public class Delivery {
         return user;
     }
 
-    public void setUser_id(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public Order getOrders() {
-        return orders;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrders(Order orders) {
-        this.orders = orders;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public Integer getTimeLimit() {
@@ -147,5 +151,29 @@ public class Delivery {
 
     public void setDelivery(EDelivery delivery) {
         this.delivery = delivery;
+    }
+
+    public Integer getDeliveryFee() {
+        return deliveryFee;
+    }
+
+    public void setDeliveryFee(Integer deliveryFee) {
+        this.deliveryFee = deliveryFee;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
     }
 }

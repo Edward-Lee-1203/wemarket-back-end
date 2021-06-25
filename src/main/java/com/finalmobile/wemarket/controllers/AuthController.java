@@ -8,6 +8,8 @@ import com.finalmobile.wemarket.payload.request.LoginRequest;
 import com.finalmobile.wemarket.payload.request.SignupRequest;
 import com.finalmobile.wemarket.payload.response.JwtResponse;
 import com.finalmobile.wemarket.payload.response.MessageResponse;
+import com.finalmobile.wemarket.payload.response.SignInShipperResponse;
+import com.finalmobile.wemarket.payload.response.SignInUserResponse;
 import com.finalmobile.wemarket.repository.ShipperRepository;
 import com.finalmobile.wemarket.repository.UserRepository;
 import com.finalmobile.wemarket.service.impl.UserDetailsImpl;
@@ -48,6 +50,13 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+        if (!userRepository.existsByUsername(loginRequest.getUsername())
+                && !shipperRepository.existsByUsername(loginRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is not exits!"));
+        }
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -57,6 +66,16 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
+        for(String role : roles){
+            if(role.equals("ROLE_SHIPPER")){
+                Shipper shipper = shipperRepository.findByUsername(loginRequest.getUsername()).get();
+                return ResponseEntity.ok(new SignInShipperResponse(jwt,shipper));
+            } else{
+
+                User user = userRepository.findByUsername(loginRequest.getUsername()).get();
+                return ResponseEntity.ok(new SignInUserResponse(jwt,user));
+            }
+        }
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
@@ -77,21 +96,20 @@ public class AuthController {
         if (strRoles == null) {
             throw  new RuntimeException("Error: Role is not found.");
         } else {
-            strRoles.forEach(role -> {
+            for(String role : strRoles){
                 switch (role) {
                     case "shipper":
                         Shipper shipper = new Shipper(signUpRequest.getUsername(),
                                 encoder.encode(signUpRequest.getPassword()));
                         shipperRepository.save(shipper);
-
-
-                        break;
+                        return ResponseEntity.ok(shipper);
                     default:
                         User user = new User(signUpRequest.getUsername(),
                                 encoder.encode(signUpRequest.getPassword()));
                         userRepository.save(user);
+                        return ResponseEntity.ok(user);
                 }
-            });
+            }
         }
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

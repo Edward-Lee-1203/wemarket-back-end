@@ -20,14 +20,6 @@ public class Order {
     @NotNull
     private  Integer total_price;
 
-    @NotNull
-    @OneToMany(mappedBy = "orders")
-    private List<OrderDetail> orderDetails;
-
-    @NotNull
-    @OneToOne(mappedBy = "orders")
-    private Delivery delivery;
-
     public Order(Integer id, @NotNull Integer total_price) {
         this.id = id;
         this.total_price = total_price;
@@ -52,19 +44,4 @@ public class Order {
         this.total_price = total_price;
     }
 
-    public List<OrderDetail> getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(List<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
-    }
-
-    public Delivery getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
-    }
 }

@@ -1,5 +1,7 @@
 package com.finalmobile.wemarket.models;
 
+import com.finalmobile.wemarket.models.enums.EDelivery;
+import com.finalmobile.wemarket.models.enums.UserStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,22 +34,29 @@ public class Shipper {
     @Size(max = 20)
     private String username;
 
+    private Float longitude;
+
+    private  Float latitude;
+
+    @NotBlank
+    @Enumerated(EnumType.STRING)
+    private UserStatus shipper_status;
+
     @NotBlank
     @Size(max = 120)
     private String password;
 
-    @OneToOne(mappedBy = "shipper")
-    private Delivery delivery;
-
     public Shipper() {
     }
 
-    public Shipper(Long id, @NotBlank @Size(max = 50) String name, @NotBlank @Size(max = 20) String phone
-            , @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password) {
+    public Shipper(Long id, String name, String phone, String username, Float longitude, Float latitude,
+                   String password) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.username = username;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.password = password;
     }
 
@@ -96,17 +105,33 @@ public class Shipper {
         this.password = password;
     }
 
-    public Delivery getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
-    }
-
     public List<String> getRoles() {
         List<String> roles = new ArrayList<>();
-        roles.add("shipper");
+        roles.add("ROLE_SHIPPER");
         return roles;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
+
+    public UserStatus getShipper_status() {
+        return shipper_status;
+    }
+
+    public void setShipper_status(UserStatus shipper_status) {
+        this.shipper_status = shipper_status;
     }
 }

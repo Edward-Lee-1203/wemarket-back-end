@@ -35,6 +35,10 @@ public class User {
     @Size(max = 20)
     private String phone;
 
+    private Float longitude;
+
+    private  Float latitude;
+
     @NotNull
     private int gender;
 
@@ -42,12 +46,22 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus user_status;
 
-    @OneToOne(mappedBy = "user")
-    private Delivery delivery;
-
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User(Long id, String username, String password, String name, String phone, Float longitude, Float latitude,
+                int gender, UserStatus user_status) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.phone = phone;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.gender = gender;
+        this.user_status = user_status;
     }
 
     public User() {
@@ -109,17 +123,25 @@ public class User {
         this.user_status = user_status;
     }
 
-    public Delivery getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
-    }
-
     public List<String> getRoles() {
         List<String> roles = new ArrayList<>();
-        roles.add("user");
+        roles.add("ROLE_USER");
         return roles;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
     }
 }
