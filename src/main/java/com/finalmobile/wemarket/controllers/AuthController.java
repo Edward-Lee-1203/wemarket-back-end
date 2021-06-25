@@ -8,6 +8,8 @@ import com.finalmobile.wemarket.payload.request.LoginRequest;
 import com.finalmobile.wemarket.payload.request.SignupRequest;
 import com.finalmobile.wemarket.payload.response.JwtResponse;
 import com.finalmobile.wemarket.payload.response.MessageResponse;
+import com.finalmobile.wemarket.payload.response.SignInShipperResponse;
+import com.finalmobile.wemarket.payload.response.SignInUserResponse;
 import com.finalmobile.wemarket.repository.ShipperRepository;
 import com.finalmobile.wemarket.repository.UserRepository;
 import com.finalmobile.wemarket.service.impl.UserDetailsImpl;
@@ -64,6 +66,16 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
+        for(String role : roles){
+            if(role.equals("ROLE_SHIPPER")){
+                Shipper shipper = shipperRepository.findByUsername(loginRequest.getUsername()).get();
+                return ResponseEntity.ok(new SignInShipperResponse(jwt,shipper));
+            } else{
+
+                User user = userRepository.findByUsername(loginRequest.getUsername()).get();
+                return ResponseEntity.ok(new SignInUserResponse(jwt,user));
+            }
+        }
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),

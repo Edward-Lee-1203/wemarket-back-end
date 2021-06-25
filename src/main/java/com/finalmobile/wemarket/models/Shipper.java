@@ -40,7 +40,7 @@ public class Shipper {
 
     @NotBlank
     @Enumerated(EnumType.STRING)
-    private EDelivery shipper_status;
+    private UserStatus shipper_status;
 
     @NotBlank
     @Size(max = 120)
@@ -125,5 +125,13 @@ public class Shipper {
 
     public void setLatitude(Float latitude) {
         this.latitude = latitude;
+    }
+
+    public UserStatus getShipper_status() {
+        return shipper_status;
+    }
+
+    public void setShipper_status(UserStatus shipper_status) {
+        this.shipper_status = shipper_status;
     }
 }

@@ -17,7 +17,6 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-   @NotNull
     @ManyToOne
     @JoinColumn(name = "shipper_id")
     private Shipper shipper;
